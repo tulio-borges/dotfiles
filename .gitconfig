@@ -1,0 +1,125 @@
+[alias]
+	# Log 20 commits with abbreviated SHA and oneline
+	l = log --pretty=oneline --abbrev-commit -n 20
+
+	# Show diff with stat
+	sh = show --patch-with-stat
+
+	# Status using the short-format
+	s = status -s
+
+	# Add all tracked files
+	a = add -u
+
+	# Commit all tracked changes
+	ca = commit -av
+
+	co = checkout
+
+	# Diff without whitespace changes
+	dd = diff -w --patch-with-stat
+
+	# Show the diff between the latest commit and the current state.
+	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager dd"
+
+	# Diff against the `nth` past revision, Example usage: git di 2
+	di = !"f() { git dd HEAD~$1; }; f"
+
+	# Try to create a branch and then go to it. In practice, switch to a
+	# branch creating if needed
+	# OBS.: Don't use this if you want to checkout to a branch from the
+	# remote, use `git co` instead
+	go = !"f() { git co -b \"$1\" 2> /dev/null || git co \"$1\"; }; f"
+
+	# Get hash for a given reference
+	hash = rev-parse --verify
+
+	# Commit as a fixup
+	ff = commit --fixup
+
+	# Rebase with --autosquash
+	aa = rebase --autosquash -i
+
+	# Commit --fixup then attempt to rebase
+	fup = !"f() { local hash=$(git hash \"$1\") && git ff $hash 2> /dev/null; git aa $hash~1; }; f"
+
+	# Get current branch name
+	bb = rev-parse --abbrev-ref HEAD
+
+	# Clean the tracked changes
+	cc = reset --hard HEAD
+
+	# Clean up branches that have been merged on the remote
+	# OBS: for this to work, first checkout your main development branch
+	clean-merged = !git branch --merged | rg -v '\\*' | xargs -n 1 -r git branch -d
+
+	# Collects branches which have been deleted on the remote
+	# In case the `clean-gone` command would delete important branches, Use
+	# this command paired with gawk or sed to remove the desired branches
+	#
+	# OBS: replace rg with grep if you don't have it installed
+	# OBS: replace gawk with awk if you don't have it installed
+	get-gone = !git branch -vv | rg origin | rg gone | tr '*' ' ' | gawk '{print $1}'
+
+	# 'Dry-run' for the following command, pass a file if you want to record
+	# the branches which would be affected
+	dry-clean-gone = !git get-gone | tee $1
+
+	# DANGER! Be careful when using this command, it might delete important
+	# branches. Use the command above to check which branches would be
+	# affected
+	clean-gone = !git get-gone | xargs -n 1 -r git branch -D
+
+	# >>> These next commands assume that origin is the only remote
+
+	# Reset hard to the upstream
+	ru = !"f() { local branch=$(git bb) && git reset --hard origin/$branch; }; f"
+
+	# Diff with remote
+	du = !"f() { local branch=$(git bb) && git dd origin/$branch; }; f"
+
+	# >>> These next commands are very specific to my workflow, be
+	# careful when using them or tweak them to your own workflow
+
+	# Fetch, go to develop and reset hard
+	rd = !git fetch && git co develop && git reset --hard origin/develop
+
+	# goba `$id` switches to feature/2020/BA-`$id`
+	goba = !git go feature/2020/BA-$1
+
+	# same as goba
+	gorx = !git go feature/2020/RX-$1
+
+[branch]
+
+	sort = -committerdate
+
+[core]
+
+	# https://git-scm.com/docs/git-update-index#_untracked_cache
+	untrackedCache = true
+
+	# requires Delta https://github.com/dandavison/delta
+	pager = delta
+
+[interactive]
+
+	# requires Delta https://github.com/dandavison/delta
+	diffFilter = delta --color-only
+
+[delta]
+
+	features = side-by-side line-numbers decorations
+	whitespace-error-style = 22 reverse
+
+[delta "decorations"]
+
+	commit-decoration-style = bold yellow box ul
+	file-style = bold yellow ul
+	file-decoration-style = none
+
+[color "diff"]
+
+	meta = yellow bold
+	frag = magenta bold
+
