@@ -9,6 +9,8 @@ function go
         cd ~/Documentos/BA/OB/order-book/royalty_exchange_project/react/orderbook/
       case vp
         cd ~/Documentos/BA/OB/order-book/royalty_exchange_project/react/vp/
+      case cy
+        cd ~/Documentos/BA/OB/order-book/cypress
     end
   end
 end
