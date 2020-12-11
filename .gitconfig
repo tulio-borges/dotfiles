@@ -1,6 +1,7 @@
 [alias]
-	# Log 20 commits with abbreviated SHA and oneline
+	# Log 20/35 commits with abbreviated SHA and oneline
 	l = log --pretty=oneline --abbrev-commit -n 20
+	ll = log --pretty=oneline --abbrev-commit -n 35
 
 	# Show diff with stat
 	sh = show --patch-with-stat
@@ -16,6 +17,10 @@
 
 	co = checkout
 
+	# Push/Force-push the current branch
+	p = push origin HEAD
+	pp = push origin HEAD -f
+
 	# Diff without whitespace changes
 	dd = diff -w --patch-with-stat
 
@@ -24,6 +29,9 @@
 
 	# Diff against the `nth` past revision, Example usage: git di 2
 	di = !"f() { git dd HEAD~$1; }; f"
+
+	# Diff against the upstream branch
+	du = !"git dd origin/(git bb)"
 
 	# Try to create a branch and then go to it. In practice, switch to a
 	# branch creating if needed
@@ -74,9 +82,6 @@
 
 	# Reset hard to the upstream
 	ru = !"f() { local branch=$(git bb) && git reset --hard origin/$branch; }; f"
-
-	# Diff with remote
-	du = !"f() { local branch=$(git bb) && git dd origin/$branch; }; f"
 
 	# >>> These next commands are very specific to my workflow, be
 	# careful when using them or tweak them to your own workflow
