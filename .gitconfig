@@ -31,7 +31,7 @@
 	di = !"f() { git dd HEAD~$1; }; f"
 
 	# Diff against the upstream branch
-	du = !"git dd origin/(git bb)"
+	du = !"git dd origin/$(git bb)"
 
 	# Try to create a branch and then go to it. In practice, switch to a
 	# branch creating if needed
@@ -86,14 +86,20 @@
 	# >>> These next commands are very specific to my workflow, be
 	# careful when using them or tweak them to your own workflow
 
+	# Fetch and rebase against develop
+	rbd = !git fetch && git rebase -i origin/develop
+
 	# Fetch, go to develop and reset hard
 	rd = !git fetch && git co develop && git reset --hard origin/develop
 
 	# goba `$id` switches to feature/2020/BA-`$id`
-	goba = !git go feature/2020/BA-$1
+	goba = !git go feature/$(date +"%Y")/BA-$1
+
+	# start a new BA branch
+	sba = !git rd && git goba $1
 
 	# same as goba
-	gorx = !git go feature/2020/RX-$1
+	gorx = !git go feature/$(date +"%Y")/RX-$1
 
 [branch]
 
