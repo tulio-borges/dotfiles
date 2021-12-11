@@ -1,0 +1,5 @@
+configuration {
+ modi: "window,drun,ssh,combi";
+ font: "Fira Code 10";
+}
+@theme "solarized"
