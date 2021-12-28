@@ -98,6 +98,9 @@ myManageHook =
     role = stringProperty "WM_WINDOW_ROLE"
 
 myManageHook' = composeOne [isFullscreen -?> doFullFloat]
+toggleFloat w = windows (\s -> if M.member w (W.floating s)
+                then W.sink w s
+                else W.float w (W.RationalRect (1/3) (1/4) (1/2) (4/5)) s)
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) =
   M.fromList $
@@ -152,6 +155,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
       ((modm, xK_i), sendMessage Expand),
       -- Push window back into tiling
       ((modm, xK_t), withFocused $ windows . W.sink),
+      -- Push window to floating
+      ((modm, xK_f), withFocused toggleFloat),
       -- Quit xmonad
       ((modm .|. shiftMask, xK_q), io exitSuccess),
       -- Restart xmonad
