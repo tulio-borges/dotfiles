@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --no-fehbg --bg-scale '/usr/share/backgrounds/archlinux/archlinux-underground.jpg' 
+feh --no-fehbg --bg-scale '/usr/share/backgrounds/my-backgrounds/howling-wolf.jpg' 
