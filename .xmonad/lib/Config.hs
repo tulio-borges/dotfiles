@@ -28,10 +28,10 @@ import XMonad.Layout.Spacing
 import XMonad.Layout.Tabbed
 import qualified XMonad.StackSet as W
 
-import Control.Monad (forM_, join)
+-- import Control.Monad (join)
 import Data.List (length, sortBy, take)
-import Data.Function (on)
-import XMonad.Util.NamedWindows (getName)
+-- import Data.Function (on)
+-- import XMonad.Util.NamedWindows (getName)
 
 
 modMask' :: KeyMask
@@ -186,24 +186,26 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
           (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
       ]
 
--- using named pipes to log updates for polybar
-myLogHook = do
-  winset <- gets windowset
-  title <- maybe (return "") (fmap show . getName) . W.peek $ winset
-  let currWs = W.currentTag winset
-  let wss = map W.tag $ W.workspaces winset
-  let wsStr = join $ map (fmt currWs) $ sort' wss
+-- Using named pipes to log updates for polybar
+-- Uncomment these lines if using the xmonad modules on Polybar
+-- Remember to uncomment the imports as well!
+-- myLogHook = do
+--   winset <- gets windowset
+--   title <- maybe (return "") (fmap show . getName) . W.peek $ winset
+--   let currWs = W.currentTag winset
+--   let wss = map W.tag $ W.workspaces winset
+--   let wsStr = join $ map (fmt currWs) $ sort' wss
 
-  io $ appendFile "/tmp/.xmonad-title-log" (crop title ++ "\n")
-  io $ appendFile "/tmp/.xmonad-workspace-log" (wsStr ++ "\n")
+--   io $ appendFile "/tmp/.xmonad-title-log" (crop title ++ "\n")
+--   io $ appendFile "/tmp/.xmonad-workspace-log" (wsStr ++ "\n")
 
-  where fmt currWs ws
-          | currWs == ws = " %{o#b8bb26}%{+o} %{F#b8bb26}" ++ ws ++ "%{F-} %{o-}%{-o} "
-          | otherwise    = "  " ++ ws ++ "  "
-        sort' = sortBy (compare `on` (!! 0))
-        crop xs
-          | length xs >= 50 = take 47 xs ++ "..."
-          | otherwise       = xs
+--   where fmt currWs ws
+--           | currWs == ws = " %{o#b8bb26}%{+o} %{F#b8bb26}" ++ ws ++ "%{F-} %{o-}%{-o} "
+--           | otherwise    = "  " ++ ws ++ "  "
+--         sort' = sortBy (compare `on` (!! 0))
+--         crop xs
+--           | length xs >= 50 = take 47 xs ++ "..."
+--           | otherwise       = xs
 
 myConfig =
   def
