@@ -109,6 +109,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
   M.fromList $
     [ ((modm, xK_Return), spawn $ XMonad.terminal conf),
       ((modm, xK_r), spawn "rofi -show drun"),
+      ((modm, xK_Tab), spawn "rofi -show window"),
       -- Lock the screen and display the greeter
       ((modm, xK_l), spawn "dm-tool switch-to-greeter"),
       -- Print Screen to clipboard
@@ -121,8 +122,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
       ((modm .|. shiftMask, xK_space), setLayout $ XMonad.layoutHook conf),
       -- Resize viewed windows to the correct size
       ((modm, xK_n), refresh),
-      -- Move focus to the next window
-      ((modm, xK_Tab), B.focusDown),
       -- Move focus to the next window
       ((modm, xK_j), B.focusDown),
       -- Move focus to the previous window
@@ -153,15 +152,17 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
       -- Swap the focused window with the previous window
       ((modm .|. shiftMask, xK_k), windows W.swapUp),
       -- Shrink the master area
-      ((modm, xK_u), sendMessage Shrink),
+      -- ((modm, xK_u), sendMessage Shrink),
       -- Expand the master area
-      ((modm, xK_i), sendMessage Expand),
+      -- ((modm, xK_i), sendMessage Expand),
       -- Push window back into tiling
       ((modm, xK_t), withFocused $ windows . W.sink),
       -- Push window to floating
       ((modm, xK_f), withFocused toggleFloat),
-      -- Quit xmonad
-      ((modm .|. shiftMask, xK_q), io exitSuccess),
+      -- Quit xmonad (personal preference to kill instead of exiting xmonad)
+      ((modm .|. shiftMask .|. controlMask, xK_q), io exitSuccess),
+      -- Kill current window application
+      ((modm .|. shiftMask, xK_q), kill),
       -- Restart xmonad
       ((modm, xK_q), spawn "xmonad --recompile; xmonad --restart"),
       -- 2D navigation
