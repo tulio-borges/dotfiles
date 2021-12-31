@@ -11,6 +11,7 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.DynamicWorkspaces
 import XMonad.Actions.FloatKeys
 import XMonad.Actions.FloatSnap
+import XMonad.Actions.MessageFeedback
 import XMonad.Actions.Navigation2D
 import XMonad.Actions.Submap
 import XMonad.Hooks.DynamicLog
@@ -23,6 +24,7 @@ import qualified XMonad.Layout.BoringWindows as B
 import XMonad.Layout.Gaps
 import XMonad.Layout.LayoutModifier (ModifiedLayout (..))
 import XMonad.Layout.Minimize
+import XMonad.Layout.Maximize
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spacing
 import XMonad.Layout.Tabbed
@@ -73,10 +75,11 @@ purple = "#d3869b"
 aqua = "#8ec07c"
 
 myLayouts =
-  spacingRaw True (Border 0 0 0 0) False (Border 10 10 10 10) True
-    . gaps [(L, 10), (R, 10)]
-    . avoidStruts
+  avoidStruts
+    . maximize
     . minimize
+    . spacingRaw True (Border 0 0 0 0) False (Border 10 10 10 10) True
+    . gaps [(L, 10), (R, 10)]
     . B.boringWindows
     $ Tall 1 (3 / 100) (1 / 2) ||| Full
 
@@ -166,8 +169,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
       ((modm .|. shiftMask, xK_h), screenGo L True),
       ((modm .|. controlMask, xK_l), screenSwap R True),
       ((modm .|. controlMask, xK_h), screenSwap L True),
-      -- Struts...
-      ((modm .|. controlMask, xK_0), sendMessage ToggleStruts)
+      -- Struts and Gaps...
+      ((modm .|. controlMask, xK_0), sendSomeMessages [sm ToggleStruts, sm ToggleGaps]),
+      -- Toggle polybar
+      -- Sadly polybar can't be controled individually per workspace
+      -- I also didn't figure out how to toggle polybar and struts/gaps simultaniously
+      ((modm .|. controlMask, xK_9), spawn "polybar-msg cmd toggle")
     ]
       ++
       -- Media hotkeys
