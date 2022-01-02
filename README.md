@@ -15,11 +15,12 @@ Hello and welcome everybody! Here you have my configuration files. A summary of 
 
 Packages needed for some of these configs to work:
 
+- pacman-contrib (for the `checkupdates` command)
 - picom (X11 compositor) feh (to set the background image)
 - hacksaw xclip shotgun (for screen shots)
 - starship exa bat git-delta (CLI utilities)
 - playerctl zscroll-git (for the spotify module on polybar)
-- ttf-font-awesome ttf-material-design-icons nerd-fonts-noto nerd-fonts-fira-code (fonts)
+- ttf-font-awesome ttf-material-design-icons nerd-fonts-noto nerd-fonts-fira-code ttf-font-logos (fonts)
 
 ## How to get started with these configs
 
