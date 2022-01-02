@@ -23,8 +23,8 @@ import XMonad.Hooks.Place
 import qualified XMonad.Layout.BoringWindows as B
 import XMonad.Layout.Gaps
 import XMonad.Layout.LayoutModifier (ModifiedLayout (..))
-import XMonad.Layout.Minimize
 import XMonad.Layout.Maximize
+import XMonad.Layout.Minimize
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spacing
 import XMonad.Layout.Tabbed
@@ -52,7 +52,8 @@ myLayouts =
     . spacingRaw True (Border 0 0 0 0) False (Border 10 10 10 10) True
     . gaps [(L, 10), (R, 10)]
     . B.boringWindows
-    $ Tall 1 (3 / 100) (1 / 2) ||| Mirror (Tall 1 (3 / 100) (1 / 2)) ||| Full
+    $ myTall ||| Mirror myTall ||| noBorders Full
+    where myTall = smartBorders $ Tall 1 (1 / 100) (1 / 2)
 
 switchWorkspaceToWindow :: Window -> X ()
 switchWorkspaceToWindow w = windows $ do
@@ -123,9 +124,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
       -- Swap the focused window with the previous window
       ((modm .|. shiftMask, xK_k), windows W.swapUp),
       -- Shrink the master area
-      -- ((modm, xK_u), sendMessage Shrink),
+      ((modm, xK_u), sendMessage Shrink),
       -- Expand the master area
-      -- ((modm, xK_i), sendMessage Expand),
+      ((modm, xK_i), sendMessage Expand),
       -- Push window back into tiling
       ((modm, xK_t), withFocused $ windows . W.sink),
       -- Push window to floating
