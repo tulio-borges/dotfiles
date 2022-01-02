@@ -37,14 +37,12 @@ if [ "$1" == "--status" ]; then
     echo "$STATUS"
 else
     if [ "$STATUS" = "Stopped" ]; then
-        MSG=$(echo "No music is playing")
-    elif [ "$STATUS" = "Paused"  ]; then
-        update_hooks "$PARENT_BAR_PID" 2
-        MSG=$(playerctl --player=$PLAYER metadata --format "$FORMAT")
+        MSG="No music is playing"
     elif [ "$STATUS" = "No player is running"  ]; then
-        MSG=$(echo "$STATUS")
+        MSG=$STATUS
     else
-        update_hooks "$PARENT_BAR_PID" 1
+        HOOK=$(if [ "$STATUS" = "Paused"  ];then echo 2; else echo 1; fi)
+        update_hooks "$PARENT_BAR_PID" $HOOK
         MSG=$(playerctl --player=$PLAYER metadata --format "$FORMAT")
     fi
     BYTES=$(echo $MSG | wc -c)
