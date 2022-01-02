@@ -1,5 +1,92 @@
 configuration {
- modi: "window,drun,ssh,combi";
- font: "Fira Code 10";
+  modi: [window,drun,ssh,combi];
+  font: "Noto Sans Mono Regular 10";
+  icon-theme: "candy-icons";
+  show-icons: true;
+
+  display-drun: "";
+  display-run: "";
+  display-window: "";
+  timeout {
+    delay: 10;
+    action: "kb-cancel";
+  }
 }
-@theme "solarized"
+
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  spacing: 0;
+
+  bg: #282C34;
+  fg: #ABB2BF;
+  blue: #61AFEF;
+  blue-alt: #61AFEF15;
+  red: #E06C75;
+  red-alt: #E06C7515;
+
+  background-color: @bg;
+  text-color: @fg;
+}
+
+window {
+  border: 2px;
+  border-color: @bg;
+  background-color: @bg;
+  border-radius: 0px;
+  padding: 6px;
+  transparency: "real";
+}
+
+mainbox {
+  children: [inputbar, listview];
+}
+
+inputbar {
+  border: 0 0 0 2px;
+  border-color: @blue;
+  border-radius: 6px;
+  children: [prompt, entry];
+  margin: 0 0 6px 0;
+}
+
+entry {
+  background-color: @blue-alt;
+  padding: 10px;
+  text-color: @blue;
+}
+
+prompt {
+  background-color: @blue-alt;
+  padding: 12px;
+  text-color: @blue;
+}
+
+listview {
+  lines: 10;
+  scrollbar: false;
+}
+
+element {
+  border: 0 0 0 2px;
+  children: [element-icon, element-text];
+}
+
+element selected {
+  border-color: @red;
+  border-radius: 6px;
+}
+
+element-icon {
+  padding: 10px 10px;
+}
+
+element-text {
+  padding: 10px;
+}
+
+element-text selected {
+  background-color: @red-alt;
+  text-color: @red;
+}
