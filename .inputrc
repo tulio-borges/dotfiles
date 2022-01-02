@@ -35,6 +35,7 @@ $if mode=emacs
 "\e[F": end-of-line
 
 #for kitty terminal
+"\e[3;3~": shell-kill-word
 "\e[3;5~": shell-kill-word
 "\C-H": shell-backward-kill-word
 "\e[1;5C": forward-word
