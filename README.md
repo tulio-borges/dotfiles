@@ -8,6 +8,7 @@ Hello and welcome everybody! Here you have my configuration files. A summary of 
 - [Kitty](https://github.com/kovidgoyal/kitty) config
 - [Fish shell](https://github.com/fish-shell/fish-shell) config and functions
 - [rofi](https://github.com/davatorium/rofi) styles
+- [dunst](https://github.com/dunst-project/dunst) config
 - My .gitconfig
 - Convenience inputrc
 - Background images (sources: [1](https://drive.google.com/drive/folders/1o1qjRgkJtnF_8uGB1z6MRsQUjWinHUsw))
