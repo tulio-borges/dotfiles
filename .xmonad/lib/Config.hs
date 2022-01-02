@@ -2,6 +2,7 @@
 
 module Config where
 
+import Data.List (length, sortBy, take)
 import qualified Data.Map as M
 import Data.Ratio ((%))
 import Graphics.X11.ExtraTypes.XF86
@@ -30,12 +31,6 @@ import XMonad.Layout.Spacing
 import XMonad.Layout.Tabbed
 import qualified XMonad.StackSet as W
 
--- import Control.Monad (join)
-import Data.List (length, sortBy, take)
--- import Data.Function (on)
--- import XMonad.Util.NamedWindows (getName)
-
-
 modMask' :: KeyMask
 modMask' = mod4Mask
 
@@ -43,6 +38,7 @@ delta :: Rational
 delta = 3 / 100
 
 black = "#212121"
+
 green = "#24bf2b"
 
 myLayouts =
@@ -53,7 +49,8 @@ myLayouts =
     . gaps [(L, 10), (R, 10)]
     . B.boringWindows
     $ myTall ||| Mirror myTall ||| noBorders Full
-    where myTall = smartBorders $ Tall 1 (1 / 100) (1 / 2)
+  where
+    myTall = smartBorders $ Tall 1 (1 / 100) (1 / 2)
 
 switchWorkspaceToWindow :: Window -> X ()
 switchWorkspaceToWindow w = windows $ do
@@ -73,9 +70,14 @@ myManageHook =
     role = stringProperty "WM_WINDOW_ROLE"
 
 myManageHook' = composeOne [isFullscreen -?> doFullFloat]
-toggleFloat w = windows (\s -> if M.member w (W.floating s)
-                then W.sink w s
-                else W.float w (W.RationalRect (1/3) (1/4) (1/2) (4/5)) s)
+
+toggleFloat w =
+  windows
+    ( \s ->
+        if M.member w (W.floating s)
+          then W.sink w s
+          else W.float w (W.RationalRect (1 / 3) (1 / 4) (1 / 2) (4 / 5)) s
+    )
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) =
   M.fromList $
@@ -171,27 +173,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
           (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
       ]
 
--- Using named pipes to log updates for polybar
--- Uncomment these lines if using the xmonad modules on Polybar
--- Remember to uncomment the imports as well!
--- myLogHook = do
---   winset <- gets windowset
---   title <- maybe (return "") (fmap show . getName) . W.peek $ winset
---   let currWs = W.currentTag winset
---   let wss = map W.tag $ W.workspaces winset
---   let wsStr = join $ map (fmt currWs) $ sort' wss
-
---   io $ appendFile "/tmp/.xmonad-title-log" (crop title ++ "\n")
---   io $ appendFile "/tmp/.xmonad-workspace-log" (wsStr ++ "\n")
-
---   where fmt currWs ws
---           | currWs == ws = " %{o#b8bb26}%{+o} %{F#b8bb26}" ++ ws ++ "%{F-} %{o-}%{-o} "
---           | otherwise    = "  " ++ ws ++ "  "
---         sort' = sortBy (compare `on` (!! 0))
---         crop xs
---           | length xs >= 50 = take 47 xs ++ "..."
---           | otherwise       = xs
-
 myConfig =
   def
     { terminal = "kitty",
@@ -213,5 +194,6 @@ myConfig =
       normalBorderColor = black,
       focusedBorderColor = green,
       workspaces = workspaces',
-      modMask = modMask'
+      modMask = modMask',
+      startupHook = spawn "$HOME/.config/polybar/launch.sh"
     }

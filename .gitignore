@@ -1,8 +1,6 @@
 .config/fish/fishd.tulio-Aspire-VX5-591G
 .config/fish/fish_variables
-.xmonad/xmonad.hi
-.xmonad/xmonad.o
 .xmonad/xmonad.errors
 .xmonad/xmonad-x86_64-linux
-.xmonad/lib/Config.hi
-.xmonad/lib/Config.o
+*.hi
+*.o
