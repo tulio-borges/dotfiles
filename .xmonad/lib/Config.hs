@@ -42,37 +42,8 @@ modMask' = mod4Mask
 delta :: Rational
 delta = 3 / 100
 
-fg = "#ebdbb2"
-
-bg = "#282828"
-
-gray = "#a89984"
-
-bg1 = "#3c3836"
-
-bg2 = "#504945"
-
-bg3 = "#665c54"
-
-bg4 = "#7c6f64"
-
 black = "#212121"
-
 green = "#24bf2b"
-
-darkgreen = "#98971a"
-
-red = "#fb4934"
-
-darkred = "#cc241d"
-
-yellow = "#fabd2f"
-
-blue = "#83a598"
-
-purple = "#d3869b"
-
-aqua = "#8ec07c"
 
 myLayouts =
   avoidStruts
@@ -81,7 +52,7 @@ myLayouts =
     . spacingRaw True (Border 0 0 0 0) False (Border 10 10 10 10) True
     . gaps [(L, 10), (R, 10)]
     . B.boringWindows
-    $ Tall 1 (3 / 100) (1 / 2) ||| Full
+    $ Tall 1 (3 / 100) (1 / 2) ||| Mirror (Tall 1 (3 / 100) (1 / 2)) ||| Full
 
 switchWorkspaceToWindow :: Window -> X ()
 switchWorkspaceToWindow w = windows $ do
