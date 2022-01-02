@@ -1,7 +1,6 @@
 configuration {
   modi: [window,drun,ssh,combi];
   font: "Noto Sans Mono Regular 10";
-  icon-theme: "candy-icons";
   show-icons: true;
 
   display-drun: "";
