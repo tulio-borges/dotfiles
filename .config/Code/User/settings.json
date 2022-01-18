@@ -1,0 +1,115 @@
+{
+  "workbench.colorTheme": "Quiet Light",
+  "workbench.tree.indent": 16,
+  "spotify.showLyricsButton": false,
+  "spotify.showToggleRepeatingButton": true,
+  "spotify.showToggleShufflingButton": true,
+  "spotify.showSignInButton": false,
+  "spotify.showSignOutButton": false,
+  "[typescriptreact]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[python]": {
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": "ms-python.python",
+  },
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2,
+  "[json]": {
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[typescript]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "python.autoComplete.addBrackets": true,
+  "files.associations": {
+    "*.org": "org",
+    "**/templates/*.html": "django-html",
+    "**/templates/*": "django-txt",
+    "**/requirements{/**,*}.{txt,in}": "pip-requirements",
+    "*.log": "log",
+    "*.feature.disabled": "feature"
+  },
+  "editor.suggestSelection": "first",
+  // "editor.formatOnSave": true,
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "git.autofetch": true,
+  "emmet.includeLanguages": {
+    "django-html": "html"
+  },
+  // "python.jediEnabled": false,
+  "cucumberautocomplete.steps": [
+    "aloe_tests/features/__init__.py",
+  ],
+  "cucumberautocomplete.syncfeatures": "aloe_tests/features/{branches, master}/*.feature",
+  "cucumberautocomplete.strictGherkinCompletion": false,
+  "gotoNextPreviousMember.symbolKinds": [
+    "class",
+    "function",
+    "method",
+    "constructor"
+  ],
+  "editor.cursorSurroundingLines": 10,
+  "editor.multiCursorPaste": "full",
+  "eslint.workingDirectories": [
+    {
+      "directory": "./orderbook/react/",
+      "changeProcessCWD": true
+    }
+  ],
+  "eslint.lintTask.enable": true,
+  "python.pythonPath": "/home/tulio/Documentos/BA/OB/venv/bin/python",
+  "prettier.configPath": "/home/tulio/Documentos/BA/OB/order-book/royalty_exchange_project/react/orderbook/.prettierrc",
+  "cornflakes.linter.executablePath": "/home/tulio/.pyenv/shims/flake8",
+  "python.linting.flake8Enabled": true,
+  "files.exclude": {
+    "**/node_modules": true
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "python.languageServer": "Pylance",
+  "gitlens.views.compare.files.layout": "tree",
+  "editor.fontFamily": "'Fira Code'",
+  // "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+  "editor.fontLigatures": true,
+  "python.venvPath": "~/.pyenv",
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "/home/tulio/.pyenv/shims/black",
+  "python.defaultInterpreterPath": "/home/tulio/Documentos/BA/OB/venv/bin/python",
+  "python.analysis.completeFunctionParens": true,
+  "emmet.excludeLanguages": [
+    "javascript",
+    "markdown",
+    "typescript",
+    "typescriptreact"
+  ],
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "todo.symbols.done": "✓",
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "grammarly.hideUnavailablePremiumAlerts": true,
+  "grammarly.ignore": [
+    "**/node_modules/**/*",
+    "**/*.py",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/**.pyc",
+    "**/*.json",
+    "**/*.sh",
+    "**/*.lock"
+  ],
+  "window.zoomLevel": -2
+}
